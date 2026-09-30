@@ -1,0 +1,36 @@
+package br.fiap.calculadorahtml.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
+@RestController
+@RequestMapping("/calculadora")
+public class CalculadoraController {
+    @GetMapping("/somar")
+    public double somar(double a, double b){
+        return a + b;
+    }
+
+    @GetMapping("/subtrair")
+    public double subtrair(double a, double b){
+        return a - b;
+    }
+
+    @GetMapping("/multiplicar")
+    public double multiplicar(double a, double b){
+        return a * b;
+    }
+
+    @GetMapping("/dividir")
+    public double dividir(double a, double b){
+        if (b == 0){
+            throw  new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Não existe divisão por 0");
+        }
+        return a / b;
+    }
+
+}
